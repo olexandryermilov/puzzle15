@@ -15,6 +15,8 @@ public class ConsoleReader implements Reader {
         return scanner.nextLine();
     }
 
+    //todo: write mocks for get direction method
+
     public Direction getDirection() {
         String move = readDirection();
         switch (move.toLowerCase()) {

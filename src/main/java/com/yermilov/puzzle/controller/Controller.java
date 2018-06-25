@@ -24,17 +24,20 @@ public class Controller {
         }
         return new Move(0, 0);
     }
-
+    //todo: add test with zero-Move
     private GameState swapTiles(Move move, GameState gameState) {
         int emptyX = gameState.getEmptyX();
         int emptyY = gameState.getEmptyY();
         int newEmptyX = emptyX + move.getX();
         int newEmptyY = emptyY + move.getY();
+
         Tile temp = gameState.getTable()[emptyX][emptyY];
         gameState.getTable()[emptyX][emptyY] = gameState.getTable()[newEmptyX][newEmptyY];
         gameState.getTable()[newEmptyX][newEmptyY] = temp;
+
         gameState.getTable()[emptyX][emptyY].setCurrentPosition(emptyX * gameState.getSize() + emptyY);
         gameState.getTable()[newEmptyX][newEmptyY].setCurrentPosition(newEmptyX * gameState.getSize() + newEmptyY);
+
         gameState.setEmptyX(newEmptyX);
         gameState.setEmptyY(newEmptyY);
         return gameState;

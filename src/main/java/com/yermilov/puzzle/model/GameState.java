@@ -19,8 +19,17 @@ public class GameState {
     }
 
     public GameState(Tile[][] table){
-        setTable(table);
-        this.size=table.length;
+        this.table = table;
+        size=table.length;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (table[i][j] instanceof EmptyTile) {
+                    emptyX = i;
+                    emptyY = j;
+                    break;
+                }
+            }
+        }
     }
 
     public int getSize() {
@@ -29,19 +38,6 @@ public class GameState {
 
     public Tile[][] getTable() {
         return table;
-    }
-
-    private void setTable(Tile[][] table) {
-        this.table = table;
-        for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table[i].length; j++) {
-                if (table[i][j] instanceof EmptyTile) {
-                    emptyX = i;
-                    emptyY = j;
-                    break;
-                }
-            }
-        }
     }
 
     public boolean isEndState() {
@@ -77,8 +73,7 @@ public class GameState {
         for (int i = x; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 if (i == x && y >= j) continue;
-                if (table[i][j].getFinalPosition() < table[x][y].getFinalPosition()
-                        && table[i][j].getFinalPosition() != -1) inversions++;
+                if (table[i][j].getFinalPosition() < table[x][y].getFinalPosition()) inversions++;
             }
         }
         return inversions;
