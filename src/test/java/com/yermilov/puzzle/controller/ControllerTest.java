@@ -6,13 +6,14 @@ import com.yermilov.puzzle.domain.Move;
 import com.yermilov.puzzle.model.GameState;
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ControllerTest {
 
     @Test
-    public void getMoveForDirectionTest() {
+    public void getMoveForDirection_ReturnsRightMoves_ForEachDirection() {
         Controller controller = new Controller();
         GameState gameState = new GameState(4);
         gameState.setEmptyY(2);
@@ -25,7 +26,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void proceedMoveTest() {
+    public void proceedMove_ChangesTilesPositions_WhenMovesProceeded() {
         final int[][] TABLE = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {-1, 13, 14, 15}};
         Controller controller = new Controller();
         GameState gameState = new GameState(Utils.intTableToTileTable(TABLE));
@@ -33,6 +34,16 @@ public class ControllerTest {
         gameState = controller.proceedMove(Direction.RIGHT, gameState);
         gameState = controller.proceedMove(Direction.RIGHT, gameState);
         assertTrue(gameState.isEndState());
+    }
+
+    @Test
+    public void proceedMove_ChangesTable_WhenMoveProceeded(){
+        final int[][] TABLE = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {-1, 13, 14, 15}};
+        final int[][] MOVED_TABLE = {{1, 2, 3, 4}, {5, 6, 7, 8}, {-1, 10, 11, 12}, {9, 13, 14, 15}};
+        Controller controller = new Controller();
+        GameState gameState = new GameState(Utils.intTableToTileTable(TABLE));
+        gameState = controller.proceedMove(Direction.UP, gameState);
+        assertArrayEquals("Table changes as it should after move", Utils.intTableToTileTable(MOVED_TABLE),gameState.getTable());
     }
 
 }

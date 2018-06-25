@@ -1,22 +1,22 @@
-package com.yermilov.puzzle.view;
+package com.yermilov.puzzle.input;
 
 import com.yermilov.puzzle.domain.Direction;
 
 import java.util.Scanner;
 
-public class Reader {
+public class ConsoleReader implements Reader {
     private Scanner scanner;
 
-    public Reader() {
+    public ConsoleReader() {
         scanner = new Scanner(System.in);
     }
 
-    private String readMove() {
+    private String readDirection() {
         return scanner.nextLine();
     }
 
-    public Direction getMove() {
-        String move = readMove();
+    public Direction getDirection() {
+        String move = readDirection();
         switch (move.toLowerCase()) {
             case "a":
                 return Direction.LEFT;
@@ -27,7 +27,7 @@ public class Reader {
             case "s":
                 return Direction.DOWN;
             default:
-                return getMove();
+                return getDirection();
         }
     }
 }
