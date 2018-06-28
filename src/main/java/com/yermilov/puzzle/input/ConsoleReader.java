@@ -11,11 +11,14 @@ public class ConsoleReader implements Reader {
         scanner = new Scanner(System.in);
     }
 
-    private String readDirection() {
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    String readDirection() {
         return scanner.nextLine();
     }
 
-    //todo: write mocks for get direction method
 
     public Direction getDirection() {
         String move = readDirection();
@@ -29,6 +32,7 @@ public class ConsoleReader implements Reader {
             case "s":
                 return Direction.DOWN;
             default:
+                System.out.println("err");
                 return getDirection();
         }
     }

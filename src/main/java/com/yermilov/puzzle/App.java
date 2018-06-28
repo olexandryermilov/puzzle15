@@ -9,7 +9,7 @@ import com.yermilov.puzzle.view.View;
 
 public class App {
     private final static int DEFAULT_SIZE = 4;
-    //todo: rewrite using args
+
     public static void main(String[] args) {
         GameState gameState = new GameState(DEFAULT_SIZE);
         View consoleView = new ConsoleView();

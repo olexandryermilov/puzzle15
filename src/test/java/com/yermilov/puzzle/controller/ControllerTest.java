@@ -37,13 +37,22 @@ public class ControllerTest {
     }
 
     @Test
-    public void proceedMove_ChangesTable_WhenMoveProceeded(){
+    public void proceedMove_ChangesTable_WhenMoveProceeded() {
         final int[][] TABLE = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {-1, 13, 14, 15}};
         final int[][] MOVED_TABLE = {{1, 2, 3, 4}, {5, 6, 7, 8}, {-1, 10, 11, 12}, {9, 13, 14, 15}};
         Controller controller = new Controller();
         GameState gameState = new GameState(Utils.intTableToTileTable(TABLE));
         gameState = controller.proceedMove(Direction.UP, gameState);
-        assertArrayEquals("Table changes as it should after move", Utils.intTableToTileTable(MOVED_TABLE),gameState.getTable());
+        assertArrayEquals("Table changes as it should after move", Utils.intTableToTileTable(MOVED_TABLE), gameState.getTable());
+    }
+
+    @Test
+    public void getMoveForDirection_ReturnsZeroMove_WhenCantMove() {
+        final int[][] TABLE = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {-1, 13, 14, 15}};
+        final Move ZERO_MOVE = new Move(0, 0);
+        Controller controller = new Controller();
+        GameState gameState = new GameState(Utils.intTableToTileTable(TABLE));
+        assertEquals("Returns zero move", ZERO_MOVE, controller.getMove(Direction.LEFT, gameState));
     }
 
 }

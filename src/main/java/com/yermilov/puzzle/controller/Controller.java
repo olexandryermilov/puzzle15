@@ -24,7 +24,6 @@ public class Controller {
         }
         return new Move(0, 0);
     }
-    //todo: add test with zero-Move
     private GameState swapTiles(Move move, GameState gameState) {
         int emptyX = gameState.getEmptyX();
         int emptyY = gameState.getEmptyY();
